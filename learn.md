@@ -12,3 +12,13 @@ warning: in the working copy of 'package.json', LF will be replaced by CRLF the 
 PS D:\Diwali\mini-ecom> git config core.autocrlf true
 
 git commit -m "Initial commit"
+
+D:\Diwali\mini-ecom>git add .
+
+git credential-manager github list
+
+git credential-manager github logout HimeshJatolia
+
+git credential-manager github login
+
+>git push -u origin main
