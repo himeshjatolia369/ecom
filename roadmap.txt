@@ -1,0 +1,20 @@
+user model:
+name: String
+email:String
+password:String
+cart:[]
+isadmin:Boolean
+order:[]
+contact:Number
+picture:db
+
+
+
+product model:
+image:db
+name:String
+price:Number
+discount:Number
+bgcolor
+panelcolor
+textcolor
