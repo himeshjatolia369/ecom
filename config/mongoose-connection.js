@@ -1,10 +1,10 @@
 const mongoose=require('mongoose')
-
-
+const dbg = require('debug')("development:mongoose");
+const config=require('config')
 mongoose
-.connect("mongodb://127.0.0.1:27017/ecom")
+.connect(`${config.get("MONGODB_URL")}/ecom`)
 .then(()=>{
-console.log("Connected")
+dbg('connected')
 })
 .catch((err)=>{
 console.log(err)

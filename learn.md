@@ -22,3 +22,7 @@ git credential-manager github logout HimeshJatolia
 git credential-manager github login
 
 >git push -u origin main
+
+$env:DEBUG="development:*" 
+
+$env:NODE_ENV="development"

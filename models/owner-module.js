@@ -13,7 +13,7 @@ product:{
     default:[]
 },
 picture:String,
-
+gstin:String
 
 });
 
