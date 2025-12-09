@@ -8,7 +8,6 @@ cart:{
     type:Array,
     default:[]
 },
-isadmin:Boolean,
 order:{
     type:Array,
     default:[]

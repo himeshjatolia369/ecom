@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="relative flex items-center justify-center min-h-screen overflow-hidden">
+
+  <!-- Background Image -->
+  <div class="absolute inset-0 -z-10">
+    <img 
+      src="https://images.unsplash.com/photo-1640963269654-3fe248c5fba6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1500" 
+      class="w-full h-full object-cover" 
+      alt="Background"
+    />
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+  </div>
+
+  <!-- Login Form -->
+  <div class="relative z-10 w-full max-w-md mx-4">
+    <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-8 border-2 border-white/30">
+
+      <!-- Heading -->
+      <div class="text-center mb-8">
+        <h1 class="text-white mb-2 text-2xl font-semibold">Welcome Back</h1>
+        <p class="text-white/80">Login to continue</p>
+      </div>
+
+      <!-- Form -->
+      <form action="/login" method="POST" class="space-y-6">
+
+        <!-- Email -->
+        <div class="space-y-2">
+          <label for="email" class="text-white">Email Address</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="john@example.com"
+            required
+            class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/40 text-white placeholder-white/50 focus:bg-white/30 outline-none"
+          />
+        </div>
+
+        <!-- Password -->
+        <div class="space-y-2">
+          <label for="password" class="text-white">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="••••••••"
+            required
+            class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/40 text-white placeholder-white/50 focus:bg-white/30 outline-none"
+          />
+        </div>
+
+        <!-- Submit -->
+        <button 
+          type="submit" 
+          class="w-full bg-white text-gray-900 py-2 rounded-lg font-semibold hover:bg-white/90"
+        >
+          Login
+        </button>
+      </form>
+
+      <!-- Link -->
+      <div class="mt-6 text-center">
+        <p class="text-white/80">
+          Don't have an account?
+          <a href="/register" class="text-white hover:text-white/80 underline">Create Account</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
