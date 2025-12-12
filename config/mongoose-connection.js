@@ -2,7 +2,7 @@ const mongoose=require('mongoose')
 const dbg = require('debug')("development:mongoose");
 const config=require('config')
 mongoose
-.connect(`${config.get("MONGODB_URL")}/ecom`)
+.connect(`${config.get("MONGODB_URL")}/RangPeherav`)
 .then(()=>{
 dbg('connected')
 })

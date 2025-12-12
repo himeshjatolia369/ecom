@@ -5,6 +5,8 @@ const productModule=require("./models/product-module")
 const ownerModule=require("./models/owner-module")
 const path=require('path');
 const cookieParser = require('cookie-parser');
+const flash=require('connect-flash')
+const expressSession=require('express-session')
 require('dotenv').config()
 
 const db=require("./config/mongoose-connection");
@@ -16,6 +18,16 @@ const indexRoute=require('./routes/indexRoute')
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
+app.use(
+    expressSession({
+        resave:false,
+        saveUninitialized:false,
+        secret:process.env.EXPRESS_SESSION_SECRET
+    }
+    )
+)
+app.use(flash())
+
 app.use(express.static(path.join(__dirname,"public")));
 app.set("views", path.join(__dirname, "views"));
 

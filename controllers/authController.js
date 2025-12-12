@@ -34,3 +34,31 @@ module.exports.registeruser=async (req, res) => {
         res.send(err.message);
     }
 }
+
+module.exports.loginuser=async(req,res)=>{
+    const {email,password}=req.body
+    const user=await userModule.findOne({email:email})
+    if(!user){
+        return res.send("user already exist's")
+    }
+    else{
+        bcrypt.compare(password,user.password,(err,result)=>{
+            if(result){
+            let token=generateToken(user)
+            res.cookie("token",token,{httpOnly:true})
+            res.send("you can login")
+            }
+            else{
+                return res.send("incorrect email password")
+            }
+        })
+    }
+}
+
+
+
+   module.exports.logoutuser = (req, res) => {
+    res.clearCookie("token");  // clears JWT cookie
+    // req.flash("success", "Logged out successfully"); // optional flash
+    res.redirect("/"); // redirect to login or home
+}
