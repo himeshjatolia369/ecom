@@ -1,5 +1,6 @@
 const express=require('express');
 const app=express();
+const multer=require('multer')
 const userModule=require("./models/user-module")
 const productModule=require("./models/product-module")
 const ownerModule=require("./models/owner-module")
@@ -12,7 +13,7 @@ require('dotenv').config()
 const db=require("./config/mongoose-connection");
 const userRoute = require('./routes/usersRoute');
 const productRoute=require('./routes/productsRoute');
-const ownerRoute=require('./routes/ownersRoute');
+const ownersRoute=require('./routes/ownersRoute');
 const indexRoute=require('./routes/indexRoute')
 
 app.use(express.json());
@@ -35,6 +36,7 @@ app.set("views", path.join(__dirname, "views"));
 
 app.set("view engine","ejs")
 app.use("/users",userRoute)
+app.use("/owners",ownersRoute)
 app.use("/products",productRoute)
 app.use("/",indexRoute)
 

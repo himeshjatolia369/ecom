@@ -89,46 +89,49 @@
 
 
     <!-- PRODUCT GRID -->
-    <div class="max-w-7xl mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <div class="max-w-7xl mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
 
         <!-- PRODUCT 1 -->
-        <div class="bg-white shadow rounded-lg p-4 border border-[#e6ccb2]">
-            <img src="https://via.placeholder.com/300x200" class="w-full h-52 object-cover rounded-lg">
+        <!-- <% products.forEach(product => { %>
+        <div class="bg-[#<%= product.bgcolor%>] shadow rounded-lg p-4 border border-[#e6ccb2]">
+            <img src="/products/images/<%= product._id %>" class="w-full h-52 object-center object-cover rounded-lg">
 
-            <h2 class="text-lg font-semibold mt-3 text-[#8b4513]">Rajasthani Bandhani Kurti</h2>
+            <h2 class="text-lg font-semibold mt-3 text-[#<%= product.textcolor %>]"><%= product.name %></h2>
             <p class="text-gray-600 text-sm">Traditional tie-dye kurti crafted by local artisans.</p>
 
-            <div class="flex justify-between items-center mt-4">
-                <span class="text-lg font-bold text-[#5a3e2b]">₹799</span>
+            <div class="flex justify-between items-center mt-4 bg-[#<%= product.panelcolor %>]">
+                <span class="text-lg font-bold text-[#5a3e2b]">₹<%= product.price %></span>
                 <button class="px-3 py-1 bg-[#c88a65] text-white rounded-lg">Add to Cart</button>
             </div>
         </div>
+        <% }) %> -->
+
+
+        <% products.forEach(product => { %>
+        <div class="bg-[#<%= product.bgcolor %>] shadow rounded-lg p-4 border border-[#e6ccb2]">
+            <img src="/products/images/<%= product._id %>" class="w-full h-52 object-center object-cover rounded-lg">
+
+            <h2 class="text-lg font-semibold mt-3 text-[#<%= product.textcolor %>]">
+                <%= product.name %>
+            </h2>
+            <p class="text-gray-600 text-sm mb-4">Traditional tie-dye kurti crafted by local artisans.</p>
+
+            <!-- Fixed panel -->
+            <div class="flex justify-between items-center mt-2  p-2 rounded">
+                <span class="text-lg font-bold text-[#5a3e2b]">₹<%= product.price %></span>
+                <button class="px-3 py-1 bg-[#<%= product.panelcolor %>] text-white rounded-lg">Add to Cart</button>
+            </div>
+        </div>
+        <% }) %> 
+
+
+
 
         <!-- PRODUCT 2 -->
-        <div class="bg-white shadow rounded-lg p-4 border border-[#e6ccb2]">
-            <img src="https://via.placeholder.com/300x200" class="w-full h-52 object-cover rounded-lg">
 
-            <h2 class="text-lg font-semibold mt-3 text-[#8b4513]">Leheriya Dupatta</h2>
-            <p class="text-gray-600 text-sm">Bright and colorful dupatta with traditional leheriya patterns.</p>
-
-            <div class="flex justify-between items-center mt-4">
-                <span class="text-lg font-bold text-[#5a3e2b]">₹499</span>
-                <button class="px-3 py-1 bg-[#c88a65] text-white rounded-lg">Add to Cart</button>
-            </div>
-        </div>
 
         <!-- PRODUCT 3 -->
-        <div class="bg-white shadow rounded-lg p-4 border border-[#e6ccb2]">
-            <img src="https://via.placeholder.com/300x200" class="w-full h-52 object-cover rounded-lg">
 
-            <h2 class="text-lg font-semibold mt-3 text-[#8b4513]">Jaipuri Printed Kurta</h2>
-            <p class="text-gray-600 text-sm">Soft cotton kurta with Jaipuri block prints.</p>
-
-            <div class="flex justify-between items-center mt-4">
-                <span class="text-lg font-bold text-[#5a3e2b]">₹999</span>
-                <button class="px-3 py-1 bg-[#c88a65] text-white rounded-lg">Add to Cart</button>
-            </div>
-        </div>
 
     </div>
 

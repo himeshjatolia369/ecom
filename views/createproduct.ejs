@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Product | Rajasthani Threads</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rjBrown: "#8b4513",
+                        rjSand: "#e6ccb2",
+                        rjLight: "#faf4ef",
+                        rjBorder: "#d1b49a",
+                        rjDark: "#5a3e2b"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-rjLight min-h-screen flex">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white border-r border-rjBorder shadow-sm p-6">
+        <h1 class="text-2xl font-extrabold text-rjBrown mb-8">
+            Rajasthani Threads
+        </h1>
+
+        <nav class="space-y-3">
+            <a href="#" class="block text-rjDark font-medium hover:text-rjBrown">
+                All Products
+            </a>
+            <a href="#" class="block text-white bg-rjBrown px-4 py-2 rounded-lg shadow">
+                Create New Product
+            </a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-10">
+
+        <h2 class="text-3xl font-bold text-rjBrown mb-6">
+            Create New Product
+        </h2>
+
+        <!-- FORM CARD -->
+        <form action="/products/create" method="POST" enctype="multipart/form-data">
+
+            <!-- PRODUCT DETAILS -->
+            <h3 class="text-xl font-semibold text-rjDark mb-4">
+                Product Details
+            </h3>
+
+            <div class="space-y-4">
+
+                <!-- Image -->
+                <div>
+                    <label class="block text-sm font-medium mb-1">Product Image</label>
+                    <input type="file" name="image" class="block w-full border border-rjBorder rounded-lg p-2">
+                </div>
+
+                <!-- Name + Price -->
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" name="name" placeholder="Product Name"
+                        class="border border-rjBorder rounded-lg px-4 py-2">
+
+                    <input type="number" name="price" placeholder="Product Price"
+                        class="border border-rjBorder rounded-lg px-4 py-2">
+                </div>
+
+                <!-- Discount -->
+                <input type="number" name="discount" placeholder="Discount Price"
+                    class="border border-rjBorder rounded-lg px-4 py-2">
+            </div>
+
+            <!-- PANEL DETAILS -->
+            <h3 class="text-xl font-semibold text-rjDark mt-8 mb-4">
+                Panel Details
+            </h3>
+
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" name="bgcolor" placeholder="Background Color"
+                    class="border border-rjBorder rounded-lg px-4 py-2">
+
+                <input type="text" name="panelcolor" placeholder="Panel Color"
+                    class="border border-rjBorder rounded-lg px-4 py-2">
+
+                <input type="text" name="textcolor" placeholder="Text Color"
+                    class="border border-rjBorder rounded-lg px-4 py-2 col-span-2">
+            </div>
+
+            <button type="submit"
+                class="mt-8 bg-rjBrown text-white px-6 py-3 rounded-lg shadow hover:bg-rjDark transition">
+                Create New Product
+            </button>
+
+        </form>
+
+
+    </main>
+
+</body>
+
+</html>

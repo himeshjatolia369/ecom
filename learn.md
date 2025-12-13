@@ -26,3 +26,11 @@ git credential-manager github login
 $env:DEBUG="development:*" 
 
 $env:NODE_ENV="development"
+
+npm i express-session connect-flash
+this for flash card
+
+
+below is for multter image
+“I implemented dynamic image serving using Express routes and MongoDB buffers, with proper content-type headers.”
+URL → route → DB → buffer → browser
