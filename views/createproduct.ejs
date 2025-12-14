@@ -32,7 +32,7 @@
         </h1>
 
         <nav class="space-y-3">
-            <a href="#" class="block text-rjDark font-medium hover:text-rjBrown">
+            <a href="/shop" class="block text-rjDark font-medium hover:text-rjBrown">
                 All Products
             </a>
             <a href="#" class="block text-white bg-rjBrown px-4 py-2 rounded-lg shadow">
@@ -43,70 +43,87 @@
 
     <!-- MAIN CONTENT -->
     <main class="flex-1 p-10">
-
-        <h2 class="text-3xl font-bold text-rjBrown mb-6">
-            Create New Product
-        </h2>
-
-        <!-- FORM CARD -->
-        <form action="/products/create" method="POST" enctype="multipart/form-data">
-
-            <!-- PRODUCT DETAILS -->
-            <h3 class="text-xl font-semibold text-rjDark mb-4">
-                Product Details
-            </h3>
-
-            <div class="space-y-4">
-
-                <!-- Image -->
-                <div>
-                    <label class="block text-sm font-medium mb-1">Product Image</label>
-                    <input type="file" name="image" class="block w-full border border-rjBorder rounded-lg p-2">
-                </div>
-
-                <!-- Name + Price -->
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="text" name="name" placeholder="Product Name"
-                        class="border border-rjBorder rounded-lg px-4 py-2">
-
-                    <input type="number" name="price" placeholder="Product Price"
-                        class="border border-rjBorder rounded-lg px-4 py-2">
-                </div>
-
-                <!-- Discount -->
-                <input type="number" name="discount" placeholder="Discount Price"
-                    class="border border-rjBorder rounded-lg px-4 py-2">
+        <% if(created && created.length> 0){ %>
+            <div id="flash-msg"
+                class="mb-4 animate-bounce w-64 h-12 mx-auto border-b-amber-800 border-2  bg-amber-300 p-3 text-center font-medium text-white ">
+                <%= created[0] %>
             </div>
+            <% } %>
 
-            <!-- Description -->
-            <textarea name="description" rows="4" placeholder="Product Description (fabric, style, craft details...)"
-                class="border mt-8 border-rjBorder rounded-lg px-4 py-2 w-full resize-none focus:outline-none focus:ring-2 focus:ring-rjBrown/40"></textarea>
+                <h2 class="text-3xl font-bold text-rjBrown mb-6">
+                    Create New Product
+                </h2>
 
-            <!-- PANEL DETAILS -->
-            <h3 class="text-xl font-semibold text-rjDark mt-8 mb-4">
-                Panel Details
-            </h3>
+                <!-- FORM CARD -->
+                <form action="/products/create" method="POST" enctype="multipart/form-data">
 
-            <div class="grid grid-cols-2 gap-4">
-                <input type="text" name="bgcolor" placeholder="Background Color"
-                    class="border border-rjBorder rounded-lg px-4 py-2">
+                    <!-- PRODUCT DETAILS -->
+                    <h3 class="text-xl font-semibold text-rjDark mb-4">
+                        Product Details
+                    </h3>
 
-                <input type="text" name="panelcolor" placeholder="Panel Color"
-                    class="border border-rjBorder rounded-lg px-4 py-2">
+                    <div class="space-y-4">
 
-                <input type="text" name="textcolor" placeholder="Text Color"
-                    class="border border-rjBorder rounded-lg px-4 py-2 col-span-2">
-            </div>
+                        <!-- Image -->
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Product Image</label>
+                            <input type="file" name="image" class="block w-full border border-rjBorder rounded-lg p-2">
+                        </div>
 
-            <button type="submit"
-                class="mt-8 bg-rjBrown text-white px-6 py-3 rounded-lg shadow hover:bg-rjDark transition">
-                Create New Product
-            </button>
+                        <!-- Name + Price -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" name="name" placeholder="Product Name"
+                                class="border border-rjBorder rounded-lg px-4 py-2">
 
-        </form>
+                            <input type="number" name="price" placeholder="Product Price"
+                                class="border border-rjBorder rounded-lg px-4 py-2">
+                        </div>
+
+                        <!-- Discount -->
+                        <input type="number" name="discount" placeholder="Discount Price"
+                            class="border border-rjBorder rounded-lg px-4 py-2">
+                    </div>
+
+                    <!-- Description -->
+                    <textarea name="description" rows="4"
+                        placeholder="Product Description (fabric, style, craft details...)"
+                        class="border mt-8 border-rjBorder rounded-lg px-4 py-2 w-full resize-none focus:outline-none focus:ring-2 focus:ring-rjBrown/40"></textarea>
+
+                    <!-- PANEL DETAILS -->
+                    <h3 class="text-xl font-semibold text-rjDark mt-8 mb-4">
+                        Panel Details
+                    </h3>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" name="bgcolor" placeholder="Background Color"
+                            class="border border-rjBorder rounded-lg px-4 py-2">
+
+                        <input type="text" name="panelcolor" placeholder="Panel Color"
+                            class="border border-rjBorder rounded-lg px-4 py-2">
+
+                        <input type="text" name="textcolor" placeholder="Text Color"
+                            class="border border-rjBorder rounded-lg px-4 py-2 col-span-2">
+                    </div>
+
+                    <button type="submit"
+                        class="mt-8 bg-rjBrown text-white px-6 py-3 rounded-lg shadow hover:bg-rjDark transition">
+                        Create New Product
+                    </button>
+
+                </form>
 
 
     </main>
+
+    <script>
+        // Hide flash message after 3 seconds
+        const flash = document.getElementById('flash-msg');
+        if (flash) {
+            setTimeout(() => {
+                flash.style.display = 'none';
+            }, 3000); // 3000ms = 3 seconds
+        }
+    </script>
 
 </body>
 

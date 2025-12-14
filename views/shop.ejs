@@ -18,157 +18,211 @@
             document.getElementById("orderSection").classList.add("hidden");
             document.getElementById("profileDetails").classList.remove("hidden");
         }
-
     </script>
-
 </head>
 
 <body class="bg-[#faf4ef] min-h-screen">
 
     <!-- NAVBAR -->
-    <nav class="bg-white shadow p-4 flex justify-between items-center border-b border-[#d1b49a]">
+    <nav
+        class="fixed top-0 left-0 w-full z-50 bg-white p-4 flex justify-between items-center border-b border-[#d1b49a] shadow-[0_0_5px_#FFD700]">
         <h1 class="text-2xl font-bold text-[#8b4513]">Rajasthani Threads</h1>
 
         <div class="flex items-center gap-4">
-            <input type="text" placeholder="Search clothing..."
-                class="px-4 py-2 border rounded-lg w-64 border-[#d4a373]">
+            <form method="GET" action="/shop" class="flex gap-2">
+                <input type="text" name="search" placeholder="Search clothing..."
+                    class="px-4 py-2 border rounded-lg w-64 focus:outline-amber-300 border-amber-200">
+                <button class="px-4 py-2 bg-[#8b4513] text-white rounded-lg">
+                    Search
+                </button>
+            </form>
 
-            <button class="px-4 py-2 bg-[#e6ccb2] text-[#5a3e2b] rounded-lg">Filter</button>
-            <a href="/cart" class="px-4 py-2 bg-[#c88a65] text-white rounded-lg inline-block">
+            <button class="px-4 py-2 bg-[#e6ccb2] text-[#5a3e2b] w-28 rounded-lg">Ai</button>
+
+            <a href="/cart" class="px-4 py-2 bg-[#c88a65] text-white rounded-lg">
                 Cart
             </a>
 
-            <button onclick="toggleProfile()" class="px-4 py-2 bg-[#8b4513] text-white rounded-lg">Profile</button>
+            <button onclick="toggleProfile()" class="px-4 py-2 bg-[#8b4513] text-white rounded-lg">
+                Profile
+            </button>
         </div>
     </nav>
 
-    <!-- Flash Message -->
-    <% if(success && success.length> 0){ %>
-        <div id="flash-msg" class="mb-4 p-3 rounded-lg bg-red-500/80 text-white text-center font-medium animate-bounce">
-            <%= success[0] %>
-        </div>
-        <% } %>
-    <% if(added && added.length> 0){ %>
-        <div id="flash-msg" class="mb-4 p-3 rounded-lg bg-red-500/80 text-white text-center font-medium animate-bounce">
-            <%= added[0] %>
-        </div>
-        <% } %>
-
-
-
-            <!-- PROFILE SIDE PANEL -->
-            <div id="profilePanel"
-                class="fixed top-0 right-0 w-[20%] h-full bg-white shadow-xl p-6 border-l border-[#d1b49a] transform translate-x-full transition-all duration-300 z-50">
-
-                <!-- Profile Details -->
-                <div id="profileDetails">
-                    <div class="flex flex-col items-center">
-                        <img src="https://i.pravatar.cc/150?img=3"
-                            class="w-28 h-28 rounded-full border-4 border-[#d4a373]">
-                        <h2 class="mt-4 text-xl font-semibold">John Doe</h2>
-                        <p class="text-sm text-gray-600">johndoe@example.com</p>
-                    </div>
-
-                    <button onclick="showOrders()" class="w-full mt-6 py-2 bg-[#c88a65] text-white rounded-lg">
-                        View Order History
-                    </button>
-
-                    <button onclick="toggleProfile()" class="w-full mt-3 py-2 bg-red-500 text-white rounded-lg">
-                        Close
-                    </button>
-                    <a href="/users/logout"
-                        class="block text-center mt-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200">
-                        Logout
-                    </a>
-
-                </div>
-
-                <!-- Order Section -->
-                <div id="orderSection" class="hidden">
-                    <h2 class="text-xl font-semibold mb-3">Your Orders</h2>
-
-                    <div class="space-y-3">
-                        <div class="border p-3 rounded-lg">
-                            <p><strong>Order #RJT1001</strong></p>
-                            <p>Total: ₹1499</p>
-                            <p>Status: Delivered</p>
-                        </div>
-                        <div class="border p-3 rounded-lg">
-                            <p><strong>Order #RJT1002</strong></p>
-                            <p>Total: ₹899</p>
-                            <p>Status: Shipped</p>
-                        </div>
-                    </div>
-
-                    <button onclick="backToProfile()" class="w-full mt-4 py-2 bg-[#8b4513] text-white rounded-lg">
-                        Back
-                    </button>
-                </div>
+    <!-- PUSH CONTENT BELOW FIXED NAVBAR -->
+    <div class="pt-[80px]">
+        <!-- FLASH MESSAGES -->
+        <% if (success && success.length> 0) { %>
+            <div id="flash-msg" class="mx-6 mb-4 p-3 rounded-lg bg-green-600 text-white text-center font-medium shadow">
+                <%= success[0] %>
             </div>
+            <% } %>
+
+                <% if (added && added.length> 0) { %>
+                    <div id="flash-msg"
+                        class="mx-6 mb-4 p-3 rounded-lg bg-amber-600 text-white text-center font-medium shadow">
+                        <%= added[0] %>
+                    </div>
+                    <% } %>
 
 
-            <!-- PRODUCT GRID -->
-            <div class="max-w-7xl mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                        <!-- PROFILE SIDE PANEL -->
+                        <div id="profilePanel"
+                            class="fixed top-0 right-0 w-[20%] h-full bg-white shadow-xl p-6 border-l border-[#d1b49a] transform translate-x-full transition-all duration-300 z-50">
+                            <div id="profileDetails">
+                                <div class="flex flex-col items-center">
+                                    <img src="https://i.pravatar.cc/150?img=3"
+                                        class="w-28 h-28 rounded-full border-4 border-[#d4a373]">
+                                    <h2 class="mt-4 text-xl font-semibold">
+                                        <%= user[0].fullname %>
+                                    </h2>
+                                    <p class="text-sm text-gray-600">
+                                        <%= user[0].email %>
+                                    </p>
+                                </div>
 
-                <!-- PRODUCT 1 -->
-                <!-- <% products.forEach(product => { %>
-        <div class="bg-[#<%= product.bgcolor%>] shadow rounded-lg p-4 border border-[#e6ccb2]">
-            <img src="/products/images/<%= product._id %>" class="w-full h-52 object-center object-cover rounded-lg">
-
-            <h2 class="text-lg font-semibold mt-3 text-[#<%= product.textcolor %>]"><%= product.name %></h2>
-            <p class="text-gray-600 text-sm">Traditional tie-dye kurti crafted by local artisans.</p>
-
-            <div class="flex justify-between items-center mt-4 bg-[#<%= product.panelcolor %>]">
-                <span class="text-lg font-bold text-[#5a3e2b]">₹<%= product.price %></span>
-                <button class="px-3 py-1 bg-[#c88a65] text-white rounded-lg">Add to Cart</button>
-            </div>
-        </div>
-        <% }) %> -->
-
-
-                <% products.forEach(product=> { %>
-                    <div class="bg-[#<%= product.bgcolor %>] shadow rounded-lg p-4 border border-[#e6ccb2]">
-                        <img src="/products/images/<%= product._id %>"
-                            class="w-full h-52 object-center object-cover rounded-lg">
-
-                        <h2 class="text-lg font-semibold mt-3 text-[#<%= product.textcolor %>]">
-                            <%= product.name %>
-                        </h2>
-                        <p class="text-gray-600 text-sm mb-4">Traditional tie-dye kurti crafted by local artisans.</p>
-
-                        <!-- Fixed panel -->
-                        <div class="flex justify-between items-center mt-2  p-2 rounded">
-                            <span class="text-lg font-bold text-[#5a3e2b]">₹<%= product.price %></span>
-                            <form action="/addtocart/<%= product._id %>" method="POST">
-                                <button type="submit"
-                                    class="px-3 py-1 bg-[#<%= product.panelcolor %>] text-white rounded-lg w-full">
-                                    Add to Cart
+                                <button onclick="showOrders()"
+                                    class="w-full mt-6 py-2 bg-[#c88a65] text-white rounded-lg">
+                                    View Order History
                                 </button>
-                            </form>
+
+                                <button onclick="toggleProfile()"
+                                    class="w-full mt-3 py-2 bg-red-500 text-white rounded-lg">
+                                    Close
+                                </button>
+
+                                <a href="/users/logout"
+                                    class="block text-center mt-3 py-2 bg-red-500 text-white rounded-lg">
+                                    Logout
+                                </a>
+                            </div>
+                            <!-- ORDER SECTION -->
+                            <div id="orderSection" class="hidden">
+                                <h2 class="text-xl font-semibold mb-4 text-[#8b4513]">
+                                    Your Orders
+                                </h2>
+
+                                <div class="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
+
+                                    <!-- ORDER CARD -->
+                                    <div class="border border-[#e6ccb2] p-4 rounded-lg bg-[#faf4ef]">
+                                        <p class="font-semibold text-[#5a3e2b]">
+                                            Order #RJT1001
+                                        </p>
+                                        <p>Total: ₹1499</p>
+                                        <p class="text-green-600 font-medium">Delivered</p>
+                                    </div>
+
+                                    <div class="border border-[#e6ccb2] p-4 rounded-lg bg-[#faf4ef]">
+                                        <p class="font-semibold text-[#5a3e2b]">
+                                            Order #RJT1002
+                                        </p>
+                                        <p>Total: ₹899</p>
+                                        <p class="text-yellow-600 font-medium">Shipped</p>
+                                    </div>
+
+                                </div>
+
+                                <button onclick="backToProfile()"
+                                    class="w-full mt-6 py-2 bg-[#8b4513] text-white rounded-lg">
+                                    Back to Profile
+                                </button>
+                            </div>
+
                         </div>
-                    </div>
-                    <% }) %>
 
 
 
+                        <!-- PAGE LAYOUT -->
+                        <div class="flex">
 
-                        <!-- PRODUCT 2 -->
+                            <!-- LEFT FILTER SIDEBAR -->
+                            <aside class="fixed top-[80px] left-6 w-[260px] h-[calc(100vh-80px)] bg-white rounded-b-[8rem]
+                border-b border-[#d1b49a] p-6 shadow-[0_0_5px_#FFD700] overflow-y-auto z-40">
+
+                                <h2 class="text-lg font-bold text-[#8b4513] mb-6">Filters</h2>
+
+                                <form method="GET" action="/shop" class="space-y-5">
+                                    <select name="category"
+                                        class="w-full p-2 rounded-md border border-amber-200 focus:outline-amber-300">
+                                        <option value="">Category</option>
+                                        <option value="men">Men</option>
+                                        <option value="women">Women</option>
+                                    </select>
+
+                                    <div>
+                                        <label class="block text-sm font-semibold text-[#5a3e2b] mb-1">
+                                            Price Range
+                                        </label>
+                                        <div class="flex gap-3">
+                                            <input type="number" name="minPrice" placeholder="Min ₹"
+                                                class="w-1/2 p-2 rounded-md border border-amber-200">
+                                            <input type="number" name="maxPrice" placeholder="Max ₹"
+                                                class="w-1/2 p-2 rounded-md border border-amber-200">
+                                        </div>
+                                    </div>
+
+                                    <select name="price" class="w-full p-2 rounded-md border border-amber-200">
+                                        <option value="">Price</option>
+                                        <option value="low-high">Low to High</option>
+                                        <option value="high-low">High to Low</option>
+                                    </select>
+
+                                    <button type="submit" class="w-full bg-[#8b4513] text-white py-2 rounded-md">
+                                        Apply Filter
+                                    </button>
+                                </form>
+                            </aside>
+
+                            <!-- PRODUCTS -->
+                            <main class="flex-1 bg-[#faf4ef] ml-[300px]">
+                                <div class="max-w-6xl px-10 pt-14">
+                                    <div class="grid grid-cols-4 gap-6">
+                                        <% products.forEach(product=> { %>
+                                            <div class="bg-[#f7ead7] rounded-xl shadow p-4 border border-[#e6ccb2]">
+                                                <img src="/products/images/<%= product._id %>"
+                                                    class="w-full h-48 object-cover rounded-lg">
+
+                                                <h2 class="text-lg font-semibold mt-3 text-[#8b4513]">
+                                                    <%= product.name %>
+                                                </h2>
+
+                                                <p class="text-sm text-[#6b4a2d] truncate mb-4">
+                                                    <%= product.description %>
+                                                </p>
+
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-lg font-bold text-[#5a3e2b]">
+                                                        ₹<%= product.price %>
+                                                    </span>
+
+                                                    <form action="/addtocart/<%= product._id %>" method="POST">
+                                                        <button class="px-4 py-1 bg-[#c88a65] text-white rounded-md">
+                                                            Add to Cart
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <% }) %>
+                                    </div>
+                                </div>
+                            </main>
+
+                        </div>
+    </div>
 
 
-                        <!-- PRODUCT 3 -->
 
+    <script>
+        const flash = document.getElementById("flash-msg");
+    if (flash) {
+        setTimeout(() => {
+            flash.style.opacity = "0";
+            setTimeout(() => flash.remove(), 300);
+        }, 2500);
+    }
+    </script>
 
-            </div>
-
-            <script>
-                // Hide flash message after 3 seconds
-                const flash = document.getElementById('flash-msg');
-                if (flash) {
-                    setTimeout(() => {
-                        flash.style.display = 'none';
-                    }, 3000); // 3000ms = 3 seconds
-                }
-            </script>
 </body>
 
 </html>

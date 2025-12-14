@@ -4,6 +4,9 @@ const isloggedin=require('../middlewares/isLoggedin')
 const productModel=require('../models/product-module')
 const userModel=require('../models/user-module')
 const {generateBill}=require('../utils/generateBill')
+const {productSort}=require('../utils/productSort')
+const {productsearch}=require('../utils/productSearch')
+const {productpricerange}=require('../utils/productPriceRange')
 
 router.get('/',(req,res)=>{
     let error=req.flash("error")
@@ -19,10 +22,19 @@ router.get('/login',(req,res)=>{
 })
 
 router.get('/shop',isloggedin,async(req,res)=>{
-    const products=await productModel.find();
+    const user=await userModel.find({email:req.user.email})
+    const sortOption = productSort(req.query)
+    const pricerange = productpricerange(req.query)
+    const productSearch = productsearch(req.query)
+    const filters={
+        ...pricerange,
+        ...productSearch
+    }
+
+    const products=await productModel.find(filters).sort(sortOption);
     let success=req.flash("success")
     let added=req.flash("added")
-    res.render("shop",{products,success,added})
+    res.render("shop",{products,user,success,added})
 })
 router.get('/cart',isloggedin,async(req,res)=>{
     const user=await userModel
@@ -45,7 +57,7 @@ router.post('/addtocart/:productid',isloggedin,async(req,res)=>{
     )
 
     if(item){
-        req.flash("Added","Prodduct is already added to Cart")
+        req.flash("added","Prodduct is already added to Cart")
     }
     else{
         user.cart.push({

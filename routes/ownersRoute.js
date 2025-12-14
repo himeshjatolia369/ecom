@@ -26,7 +26,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 router.get("/admin", (req, res) => { 
-    res.render("createproduct")
+    const created=req.flash("created")
+    res.render("createproduct",{created})
 })
 
 module.exports = router

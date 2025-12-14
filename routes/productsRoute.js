@@ -21,7 +21,8 @@ router.post("/create", upload.single('image'), async(req, res) => {
         panelcolor,
         textcolor
     })
-    res.redirect("/shop")
+    req.flash("created","Product created")
+    res.redirect('/owners/admin')
 })
 
 router.get('/images/:id',async(req,res)=>{
