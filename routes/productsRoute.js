@@ -7,9 +7,10 @@ router.get("/", (req, res) => {
     res.send("Product page")
 })
 router.post("/create", upload.single('image'), async(req, res) => {
-    const {name,price,discount,bgcolor,panelcolor,textcolor}=req.body
+    const {name,description,price,discount,bgcolor,panelcolor,textcolor}=req.body
     const product =await productModel.create({
         name,
+        description,
         image:{
             data:req.file.buffer,
             contentType:req.file.mimetype

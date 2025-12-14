@@ -18,7 +18,9 @@
             document.getElementById("orderSection").classList.add("hidden");
             document.getElementById("profileDetails").classList.remove("hidden");
         }
+
     </script>
+
 </head>
 
 <body class="bg-[#faf4ef] min-h-screen">
@@ -32,67 +34,84 @@
                 class="px-4 py-2 border rounded-lg w-64 border-[#d4a373]">
 
             <button class="px-4 py-2 bg-[#e6ccb2] text-[#5a3e2b] rounded-lg">Filter</button>
-            <button class="px-4 py-2 bg-[#c88a65] text-white rounded-lg">Cart</button>
+            <a href="/cart" class="px-4 py-2 bg-[#c88a65] text-white rounded-lg inline-block">
+                Cart
+            </a>
+
             <button onclick="toggleProfile()" class="px-4 py-2 bg-[#8b4513] text-white rounded-lg">Profile</button>
         </div>
     </nav>
 
+    <!-- Flash Message -->
+    <% if(success && success.length> 0){ %>
+        <div id="flash-msg" class="mb-4 p-3 rounded-lg bg-red-500/80 text-white text-center font-medium animate-bounce">
+            <%= success[0] %>
+        </div>
+        <% } %>
+    <% if(added && added.length> 0){ %>
+        <div id="flash-msg" class="mb-4 p-3 rounded-lg bg-red-500/80 text-white text-center font-medium animate-bounce">
+            <%= added[0] %>
+        </div>
+        <% } %>
 
-    <!-- PROFILE SIDE PANEL -->
-    <div id="profilePanel"
-        class="fixed top-0 right-0 w-[20%] h-full bg-white shadow-xl p-6 border-l border-[#d1b49a] transform translate-x-full transition-all duration-300 z-50">
 
-        <!-- Profile Details -->
-        <div id="profileDetails">
-            <div class="flex flex-col items-center">
-                <img src="https://i.pravatar.cc/150?img=3" class="w-28 h-28 rounded-full border-4 border-[#d4a373]">
-                <h2 class="mt-4 text-xl font-semibold">John Doe</h2>
-                <p class="text-sm text-gray-600">johndoe@example.com</p>
+
+            <!-- PROFILE SIDE PANEL -->
+            <div id="profilePanel"
+                class="fixed top-0 right-0 w-[20%] h-full bg-white shadow-xl p-6 border-l border-[#d1b49a] transform translate-x-full transition-all duration-300 z-50">
+
+                <!-- Profile Details -->
+                <div id="profileDetails">
+                    <div class="flex flex-col items-center">
+                        <img src="https://i.pravatar.cc/150?img=3"
+                            class="w-28 h-28 rounded-full border-4 border-[#d4a373]">
+                        <h2 class="mt-4 text-xl font-semibold">John Doe</h2>
+                        <p class="text-sm text-gray-600">johndoe@example.com</p>
+                    </div>
+
+                    <button onclick="showOrders()" class="w-full mt-6 py-2 bg-[#c88a65] text-white rounded-lg">
+                        View Order History
+                    </button>
+
+                    <button onclick="toggleProfile()" class="w-full mt-3 py-2 bg-red-500 text-white rounded-lg">
+                        Close
+                    </button>
+                    <a href="/users/logout"
+                        class="block text-center mt-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200">
+                        Logout
+                    </a>
+
+                </div>
+
+                <!-- Order Section -->
+                <div id="orderSection" class="hidden">
+                    <h2 class="text-xl font-semibold mb-3">Your Orders</h2>
+
+                    <div class="space-y-3">
+                        <div class="border p-3 rounded-lg">
+                            <p><strong>Order #RJT1001</strong></p>
+                            <p>Total: ₹1499</p>
+                            <p>Status: Delivered</p>
+                        </div>
+                        <div class="border p-3 rounded-lg">
+                            <p><strong>Order #RJT1002</strong></p>
+                            <p>Total: ₹899</p>
+                            <p>Status: Shipped</p>
+                        </div>
+                    </div>
+
+                    <button onclick="backToProfile()" class="w-full mt-4 py-2 bg-[#8b4513] text-white rounded-lg">
+                        Back
+                    </button>
+                </div>
             </div>
 
-            <button onclick="showOrders()" class="w-full mt-6 py-2 bg-[#c88a65] text-white rounded-lg">
-                View Order History
-            </button>
 
-            <button onclick="toggleProfile()" class="w-full mt-3 py-2 bg-red-500 text-white rounded-lg">
-                Close
-            </button>
-            <a href="/users/logout"
-                class="block text-center mt-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200">
-                Logout
-            </a>
+            <!-- PRODUCT GRID -->
+            <div class="max-w-7xl mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
 
-        </div>
-
-        <!-- Order Section -->
-        <div id="orderSection" class="hidden">
-            <h2 class="text-xl font-semibold mb-3">Your Orders</h2>
-
-            <div class="space-y-3">
-                <div class="border p-3 rounded-lg">
-                    <p><strong>Order #RJT1001</strong></p>
-                    <p>Total: ₹1499</p>
-                    <p>Status: Delivered</p>
-                </div>
-                <div class="border p-3 rounded-lg">
-                    <p><strong>Order #RJT1002</strong></p>
-                    <p>Total: ₹899</p>
-                    <p>Status: Shipped</p>
-                </div>
-            </div>
-
-            <button onclick="backToProfile()" class="w-full mt-4 py-2 bg-[#8b4513] text-white rounded-lg">
-                Back
-            </button>
-        </div>
-    </div>
-
-
-    <!-- PRODUCT GRID -->
-    <div class="max-w-7xl mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-
-        <!-- PRODUCT 1 -->
-        <!-- <% products.forEach(product => { %>
+                <!-- PRODUCT 1 -->
+                <!-- <% products.forEach(product => { %>
         <div class="bg-[#<%= product.bgcolor%>] shadow rounded-lg p-4 border border-[#e6ccb2]">
             <img src="/products/images/<%= product._id %>" class="w-full h-52 object-center object-cover rounded-lg">
 
@@ -107,34 +126,49 @@
         <% }) %> -->
 
 
-        <% products.forEach(product => { %>
-        <div class="bg-[#<%= product.bgcolor %>] shadow rounded-lg p-4 border border-[#e6ccb2]">
-            <img src="/products/images/<%= product._id %>" class="w-full h-52 object-center object-cover rounded-lg">
+                <% products.forEach(product=> { %>
+                    <div class="bg-[#<%= product.bgcolor %>] shadow rounded-lg p-4 border border-[#e6ccb2]">
+                        <img src="/products/images/<%= product._id %>"
+                            class="w-full h-52 object-center object-cover rounded-lg">
 
-            <h2 class="text-lg font-semibold mt-3 text-[#<%= product.textcolor %>]">
-                <%= product.name %>
-            </h2>
-            <p class="text-gray-600 text-sm mb-4">Traditional tie-dye kurti crafted by local artisans.</p>
+                        <h2 class="text-lg font-semibold mt-3 text-[#<%= product.textcolor %>]">
+                            <%= product.name %>
+                        </h2>
+                        <p class="text-gray-600 text-sm mb-4">Traditional tie-dye kurti crafted by local artisans.</p>
 
-            <!-- Fixed panel -->
-            <div class="flex justify-between items-center mt-2  p-2 rounded">
-                <span class="text-lg font-bold text-[#5a3e2b]">₹<%= product.price %></span>
-                <button class="px-3 py-1 bg-[#<%= product.panelcolor %>] text-white rounded-lg">Add to Cart</button>
+                        <!-- Fixed panel -->
+                        <div class="flex justify-between items-center mt-2  p-2 rounded">
+                            <span class="text-lg font-bold text-[#5a3e2b]">₹<%= product.price %></span>
+                            <form action="/addtocart/<%= product._id %>" method="POST">
+                                <button type="submit"
+                                    class="px-3 py-1 bg-[#<%= product.panelcolor %>] text-white rounded-lg w-full">
+                                    Add to Cart
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <% }) %>
+
+
+
+
+                        <!-- PRODUCT 2 -->
+
+
+                        <!-- PRODUCT 3 -->
+
+
             </div>
-        </div>
-        <% }) %> 
 
-
-
-
-        <!-- PRODUCT 2 -->
-
-
-        <!-- PRODUCT 3 -->
-
-
-    </div>
-
+            <script>
+                // Hide flash message after 3 seconds
+                const flash = document.getElementById('flash-msg');
+                if (flash) {
+                    setTimeout(() => {
+                        flash.style.display = 'none';
+                    }, 3000); // 3000ms = 3 seconds
+                }
+            </script>
 </body>
 
 </html>

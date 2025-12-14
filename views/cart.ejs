@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart | Rajasthani Threads</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rjBrown: "#8b4513",
+                        rjSand: "#e6ccb2",
+                        rjLight: "#faf4ef",
+                        rjBorder: "#d1b49a",
+                        rjDark: "#5a3e2b"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-rjLight min-h-screen">
+
+    <!-- NAVBAR -->
+    <nav class="bg-white border-b border-rjBorder shadow p-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-rjBrown">Rajasthani Threads</h1>
+
+        <a href="/shop" class="text-rjDark font-medium hover:text-rjBrown">
+            ← Continue Shopping
+        </a>
+    </nav>
+
+    <!-- CART SECTION -->
+    <main class="max-w-6xl mx-auto p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- CART ITEMS -->
+        <section class="md:col-span-2 space-y-6">
+
+            <h2 class="text-2xl font-semibold text-rjBrown">Shopping Cart</h2>
+            <% user.cart.forEach(item=> { %>
+                <!-- ITEM 1 -->
+                <div class="bg-white border border-rjBorder rounded-xl p-4 flex gap-4">
+                    <img src="/products/images/<%= item.productId._id %>" class="w-28 h-28 object-cover rounded-lg">
+
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-rjDark">
+                            <%= item.productId.name %>
+                        </h3>
+                        <p class="text-sm text-gray-600 line-clamp-1 w-3/4">
+                            <%= item.productId.description %>
+                        </p>
+
+
+                        <div class="flex items-center gap-4 mt-3">
+                            <span class="font-bold text-rjBrown">₹ <%= item.price %></span>
+
+                            <!-- Quantity -->
+                            <div class="flex items-center border rounded-lg">
+                                <form  action="/cart/decrease/<%= item.productId._id %>" method="post">
+                                <button type="submit" class="px-3 py-1">-</button>
+                                </form>
+                                <span class="px-4"><%= item.quantity %></span>
+                                <form  action="/cart/increase/<%= item.productId._id %>" method="post">
+                                <button class="px-3 py-1">+</button>
+                                </form>
+                            </div>
+                            <form action="/cart/remove/<%= item.productId._id %>" method="post">
+                            <button class="text-red-500 text-sm hover:underline">
+                                Remove
+                            </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <% }) %>
+
+                    <!-- ITEM 2 -->
+                    
+
+        </section>
+
+        <!-- ORDER SUMMARY -->
+         
+        <aside class="bg-white border border-rjBorder rounded-xl p-6 h-fit">
+
+            <h3 class="text-xl font-semibold text-rjBrown mb-4">
+                Order Summary
+            </h3>
+            <% user.cart.forEach(item => { %>
+            <!-- PRODUCT LIST -->
+            <div class="space-y-3 mb-4 text-sm">
+
+                <div class="flex justify-between text-rjDark">
+                    <span><%= item.productId.name %> × <%= item.quantity %></span>
+                    <span>₹<%= item.price %></span>
+                </div>
+
+            </div>
+            <% }) %>
+            <hr class="mb-4">
+
+            <!-- PRICE SUMMARY -->
+
+            <div class="space-y-3 text-rjDark">
+                <div class="flex justify-between">
+                    <span>Subtotal </span>
+                    <span>₹<%= bill.subtotal.toFixed(2) %></span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Discount</span>
+                    <span>₹<%= bill.totalDiscount.toFixed(2) %></span>
+                </div>
+                <div class="flex justify-between">
+                    <span>GST</span>
+                    <span>₹<%= bill.tax.toFixed(2) %></span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Shipping</span>
+                    <span>₹<%= bill.shipping.toFixed(2) %></span>
+                </div>
+
+                <div class="border-t pt-3 flex justify-between font-bold text-lg text-rjBrown">
+                    <span>Total</span>
+                    <span>₹<%= bill.total.toFixed(2) %></span>
+                </div>
+            </div>
+
+            <button class="w-full mt-6 bg-rjBrown text-white py-3 rounded-lg shadow hover:bg-rjDark transition">
+                Proceed to Checkout
+            </button>
+           
+        </aside>
+
+
+    </main>
+
+</body>
+
+</html>
