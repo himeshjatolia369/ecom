@@ -4,7 +4,7 @@ const userModule=require('../models/user-module')
 module.exports=async(req,res,next)=>{
     if(!req.cookies.token){
             req.flash("error","User must be login")
-            res.redirect('/')
+           return res.redirect('/')
     }
 
     try{

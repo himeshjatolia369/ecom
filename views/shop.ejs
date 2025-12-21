@@ -195,6 +195,9 @@
                                                     <span class="text-lg font-bold text-[#5a3e2b]">
                                                         ₹<%= product.price %>
                                                     </span>
+                                                    <span class="text-lg font-bold text-[#5a3e2b] bg-amber-600 rounded-lg">
+                                                        %<%= product.discount %>
+                                                    </span>
 
                                                     <form action="/addtocart/<%= product._id %>" method="POST">
                                                         <button class="px-4 py-1 bg-[#c88a65] text-white rounded-md">

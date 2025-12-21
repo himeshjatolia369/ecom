@@ -34,3 +34,17 @@ this for flash card
 below is for multter image
 “I implemented dynamic image serving using Express routes and MongoDB buffers, with proper content-type headers.”
 URL → route → DB → buffer → browser
+
+
+
+MongoDB (orders collection)
+        ↓
+Express API (/api/orders)
+        ↓
+React useEffect (fetch)
+        ↓
+useState (orders)
+        ↓
+UI renders orders
+
+

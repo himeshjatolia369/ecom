@@ -57,6 +57,7 @@
 
                         <div class="flex items-center gap-4 mt-3">
                             <span class="font-bold text-rjBrown">₹ <%= item.price %></span>
+                            <span class="font-bold text-rjBrown">% <%= item.productId.discount %></span>
 
                             <!-- Quantity -->
                             <div class="flex items-center border rounded-lg">
@@ -97,7 +98,7 @@
 
                 <div class="flex justify-between text-rjDark">
                     <span><%= item.productId.name %> × <%= item.quantity %></span>
-                    <span>₹<%= item.price %></span>
+                    <span>₹<%= item.price %>%<%= item.productId.discount %></span>
                 </div>
 
             </div>

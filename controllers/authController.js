@@ -25,7 +25,7 @@ module.exports.registeruser=async (req, res) => {
                     })
                     const token = generateToken(newUser)
                     res.cookie("token", token,{ httpOnly: true })
-                    return res.send("user created succesfully")
+                    return res.redirect("/shop")
                 })
             })
         }
@@ -46,7 +46,7 @@ module.exports.loginuser=async(req,res)=>{
             if(result){
             let token=generateToken(user)
             res.cookie("token",token,{httpOnly:true})
-            res.send("you can login")
+            res.redirect("/shop")
             }
             else{
                 return res.send("incorrect email password")

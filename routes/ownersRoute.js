@@ -5,7 +5,7 @@ const router = express.Router()
 // console.log(process.env.NODE_ENV)
 
 router.get("/", (req, res) => {
-    res.send("Owner page")
+    res.render("admin")
 })
 
 if (process.env.NODE_ENV === 'development') {
@@ -29,6 +29,28 @@ router.get("/admin", (req, res) => {
     const created=req.flash("created")
     res.render("createproduct",{created})
 })
+
+router.post("/login",async(req,res)=>{
+    try {
+        const {  email, password } = req.body
+        if ( !email || !password) {
+            return res.status(400).send("All field's are require")
+        }
+        const owneremail = await ownerModule.findOne({ email: email })
+
+        if (owneremail) {
+            res.redirect("/owners/admin")
+
+        }
+        else {
+            return res.send("connot login")
+        }
+    }
+    catch (err) {
+        res.send(err.message);
+    }
+})
+
 
 module.exports = router
 
