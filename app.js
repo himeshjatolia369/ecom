@@ -40,4 +40,4 @@ app.use("/owners",ownersRoute)
 app.use("/products",productRoute)
 app.use("/",indexRoute)
 
-app.listen(3000);
+module.exports = app
